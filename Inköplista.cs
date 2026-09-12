@@ -95,7 +95,7 @@ while (!addingProducts)
         }
         
         choiceToRemove = int.Parse(Console.ReadLine()!);
-        if (choiceToRemove - 1 < products.Count && choiceToRemove -1 > 0) //because index always start in 0 so i need to remove 1 from choice.
+        if (choiceToRemove - 1 < products.Count && choiceToRemove -1 >= 0) //because index always start in 0 so i need to remove 1 from choice.
         {
             products.RemoveAt(choiceToRemove -1);
             prices.RemoveAt(choiceToRemove -1);
