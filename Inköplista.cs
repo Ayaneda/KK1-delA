@@ -20,6 +20,7 @@ List <int> prices = [];
 
 bool addingProducts =false;
 int vInputPrice;
+int choiceToRemove;
 
 int totalPrice = 0;
 
@@ -27,16 +28,18 @@ int totalPrice = 0;
 while (!addingProducts)
 {
     //Check shopping list
-    Console.WriteLine("Shopping list:\n");
+    Console.WriteLine("\nShopping list:\n");
     for(int i = 0; i < products.Count; i++)
     {
-    Console.WriteLine($"{i+1}. {products[i]} - {prices[i]} kr.");
+        
+        Console.WriteLine($"{i+1}. {products[i]} - {prices[i]} kr.");
     }
     foreach(int p in prices)
     {
         totalPrice = totalPrice + p; //Total of all products.
     }
     Console.WriteLine($"Total: {totalPrice}.\n");
+    totalPrice = 0;
     //Adding choices here
     Console.WriteLine("What do you want to do?\n1. Add a product. \n2. Remove a product.");
     Console.WriteLine("Answer with 1 or 2.");
@@ -87,7 +90,16 @@ while (!addingProducts)
         {
         Console.WriteLine($"{i+1}. {products[i]} - {prices[i]} kr.");
         }
-        string choiceToRemove = Console.ReadLine()!;
         
+        choiceToRemove = int.Parse(Console.ReadLine()!);
+        if (choiceToRemove - 1 < products.Count && choiceToRemove -1 > 0)
+        {
+            products.RemoveAt(choiceToRemove -1);
+            prices.RemoveAt(choiceToRemove -1);
+        }
+        else
+        {
+            Console.WriteLine("the products is not on the list");
+        }
     }
 }
