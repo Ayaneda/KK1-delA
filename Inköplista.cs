@@ -66,7 +66,7 @@ while (!addingProducts)
             Console.Write("What is the price?: ");
             string inputPrice = Console.ReadLine()!;
             
-            while(!int.TryParse(inputPrice, out vInputPrice) || vInputPrice <= 0) //Validate a number. I thought about 0 number but it can be 2 for 1 or something like that so i will give 0 as a posible price
+            while(!int.TryParse(inputPrice, out vInputPrice) || vInputPrice < 0) //Validate a number. I thought about 0 number but it can be 2 for 1 or something like that so i will give 0 as a posible price
             {
                 Console.WriteLine("Please, add a price with positiv numbers, 0 is ok if you get an REA-offer!");
                 inputPrice = Console.ReadLine()!;
