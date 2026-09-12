@@ -15,7 +15,7 @@ using System.ComponentModel;
 List <string> products = [];
 List <int> prices = [];
 
-addingProducts =false;
+bool addingProducts =false;
 
 //MainLoop
 static void mainLoop()
@@ -23,7 +23,7 @@ static void mainLoop()
     Console.WriteLine("Shopping list:\n");
     while (!addingProducts)
     {
-        
+        getProductName();
     }
 } 
 
@@ -55,3 +55,5 @@ static void getProductName()
         Console.WriteLine("Sorry, you have already added the products"); //if the products if already added then feedback about it
     }
 }
+
+mainLoop();
