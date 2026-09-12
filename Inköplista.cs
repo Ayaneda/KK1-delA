@@ -11,49 +11,42 @@
 //Creating two list
 
 using System.ComponentModel;
+using System.IO.Pipelines;
+using System.Net.Http.Headers;
 
 List <string> products = [];
 List <int> prices = [];
 
 bool addingProducts =false;
-
-//MainLoop
-static void mainLoop()
-{
-    Console.WriteLine("Shopping list:\n");
-    while (!addingProducts)
-    {
-        getProductName();
-    }
-} 
-
-
-//Getting product name
-static void getProductName()
+int vInputPrice;
+Console.WriteLine("Shopping list:\n");
+while (!addingProducts)
 {
     Console.Write("Write the name of the product: ");
-    string inputProduct = Console.ReadLine();
+    
+    string inputProduct = Console.ReadLine()!;
+
     while (string.IsNullOrWhiteSpace(inputProduct)) //If the product is not added as string without spaces or blank will loop
     {
-        
         Console.WriteLine("Please, write name of the product:");
-        inputProduct = Console.ReadLine();
+        inputProduct = Console.ReadLine()!;
     }
-    if (!products.Contains(inputProduct.ToLower)) //check if the products have not been added before
+    if (!products.Contains(inputProduct.ToLower())) //check if the products have not been added before
     {
-        products.Add(inputProduct.ToLower); //I am securing myself that the product is added in lowercase
+        products.Add(inputProduct.ToLower()); //I am securing myself that the product is added in lowercase
         Console.WriteLine($"{inputProduct} have been added. What is the price?:");
-        int inputPrice = Console.ReadLine();
-        while(!int.TryParse(inputPrice, out int result))
+
+        string inputPrice = Console.ReadLine()!;
+        while(!int.TryParse(inputPrice, out vInputPrice))
         {
             Console.WriteLine("Please, add a price with numbers!");
+            inputPrice = Console.ReadLine()!;
+            
         }
-        prices.Add(inputPrice);
+    prices.Add(vInputPrice);
     }
     else
     {
         Console.WriteLine("Sorry, you have already added the products"); //if the products if already added then feedback about it
     }
 }
-
-mainLoop();
