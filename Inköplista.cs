@@ -28,23 +28,24 @@ int totalPrice = 0;
 while (!addingProducts)
 {
     //Check shopping list
-    Console.WriteLine("\nShopping list:\n");
+    Console.WriteLine("\n-----SHOPPING LIST-----"); //I make the list show after removing or adding products.
     for(int i = 0; i < products.Count; i++)
     {
-        
-        Console.WriteLine($"{i+1}. {products[i]} - {prices[i]} kr.");
+        string currentProduct = products[i];
+        string prodToCapital = char.ToUpper(currentProduct[0]) + currentProduct.Substring(1).ToLower();
+        Console.WriteLine($"{i+1}. {prodToCapital} - {prices[i]} kr.");
     }
     foreach(int p in prices)
     {
         totalPrice = totalPrice + p; //Total of all products.
     }
-    Console.WriteLine($"Total: {totalPrice}.\n");
-    totalPrice = 0;
+    Console.WriteLine($"\n          Total: {totalPrice} kr.");
+    Console.WriteLine("-----------------------");
+    totalPrice = 0; //Reseting totalprice because otherwise will add the last value to the new one
     //Adding choices here
-    Console.WriteLine("What do you want to do?\n1. Add a product. \n2. Remove a product.");
-    Console.WriteLine("Answer with 1 or 2.");
+    Console.WriteLine("What do you want to do?(write 1 or 2)\n   1. Add a product. \n   2. Remove a product.");
     string choice = Console.ReadLine()!;
-    while (choice != "1" && choice != "2")
+    while (choice != "1" && choice != "2")  //validating choices
     {
         Console.WriteLine("Please, give a valid choice following the instructions");
         choice= Console.ReadLine()!;
@@ -72,7 +73,7 @@ while (!addingProducts)
                 
             }
         
-        Console.WriteLine($"{inputProduct} have been added with price {vInputPrice}");
+        Console.WriteLine($"{inputProduct} have been added with price {vInputPrice}kr.");
         products.Add(inputProduct.ToLower()); //I am securing myself that the product is added in lowercase
         prices.Add(vInputPrice);
         }
@@ -85,21 +86,23 @@ while (!addingProducts)
     else
     {
         Console.WriteLine("Choose the number of the product from the shopping list.");
-        Console.WriteLine("Shopping list:\n");
-        for(int i = 0; i < products.Count; i++)
+        Console.WriteLine("Shopping list:");
+        for(int i = 0; i < products.Count; i++) //showing the list again without total price just so is easier for user to remove product
         {
-        Console.WriteLine($"{i+1}. {products[i]} - {prices[i]} kr.");
+            string currentProduct = products[i];
+            string prodToCapital = char.ToUpper(currentProduct[0]) + currentProduct.Substring(1).ToLower();
+            Console.WriteLine($"{i+1}. {prodToCapital} - {prices[i]} kr.");
         }
         
         choiceToRemove = int.Parse(Console.ReadLine()!);
-        if (choiceToRemove - 1 < products.Count && choiceToRemove -1 > 0)
+        if (choiceToRemove - 1 < products.Count && choiceToRemove -1 > 0) //because index always start in 0 so i need to remove 1 from choice.
         {
             products.RemoveAt(choiceToRemove -1);
             prices.RemoveAt(choiceToRemove -1);
         }
         else
         {
-            Console.WriteLine("the products is not on the list");
+            Console.WriteLine("The product is not in the list!");
         }
     }
 }
