@@ -19,23 +19,33 @@ List <int> prices = [];
 
 bool addingProducts =false;
 int vInputPrice;
+
+int totalPrice = 0;
 Console.WriteLine("Shopping list:\n");
+
 while (!addingProducts)
 {
+    for(int i = 0; i < products.Count; i++)
+    {
+    Console.WriteLine($"{i+1}. {products[i]} - {prices[i]} kr.");
+    }
+    foreach(int p in prices)
+    {
+        totalPrice = totalPrice + p;
+    }
+    Console.WriteLine($"Total: {totalPrice}.");
     Console.Write("Write the name of the product: ");
     
     string inputProduct = Console.ReadLine()!;
 
-    while (string.IsNullOrWhiteSpace(inputProduct)) //If the product is not added as string without spaces or blank will loop
+    while (string.IsNullOrWhiteSpace(inputProduct) || inputProduct.Any(char.IsDigit)) //If the product is not added as string without spaces or blank will loop
     {
         Console.WriteLine("Please, write name of the product:");
         inputProduct = Console.ReadLine()!;
     }
     if (!products.Contains(inputProduct.ToLower())) //check if the products have not been added before
     {
-        products.Add(inputProduct.ToLower()); //I am securing myself that the product is added in lowercase
-        Console.WriteLine($"{inputProduct} have been added. What is the price?:");
-
+        Console.Write("What is the price?: ");
         string inputPrice = Console.ReadLine()!;
         while(!int.TryParse(inputPrice, out vInputPrice))
         {
@@ -43,10 +53,12 @@ while (!addingProducts)
             inputPrice = Console.ReadLine()!;
             
         }
+    Console.WriteLine($"{inputProduct} have been added with price {vInputPrice}");
+    products.Add(inputProduct.ToLower()); //I am securing myself that the product is added in lowercase
     prices.Add(vInputPrice);
     }
     else
     {
-        Console.WriteLine("Sorry, you have already added the products"); //if the products if already added then feedback about it
+        Console.WriteLine("Sorry, you have already added the product."); //if the products if already added then feedback about it
     }
 }
