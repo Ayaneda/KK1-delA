@@ -22,10 +22,9 @@ static void mainLoop()
 {
     Console.WriteLine("Shopping list:\n");
     while (!addingProducts)
-{
-    
-    if ()
-}
+    {
+        
+    }
 } 
 
 
@@ -33,16 +32,23 @@ static void mainLoop()
 static void getProductName()
 {
     Console.Write("Write the name of the product: ");
-    string input = Console.ReadLine();
-    while (string.IsNullOrWhiteSpace(input)) //If the product is not added as string without spaces or blank will loop
+    string inputProduct = Console.ReadLine();
+    while (string.IsNullOrWhiteSpace(inputProduct)) //If the product is not added as string without spaces or blank will loop
     {
         
         Console.WriteLine("Please, write name of the product:");
-        input = Console.ReadLine();
+        inputProduct = Console.ReadLine();
     }
-    if (!products.Contains(input.ToLower)) //check if the products have not been added before
+    if (!products.Contains(inputProduct.ToLower)) //check if the products have not been added before
     {
-        products.Add(input.ToLower); //I am securing myself that the product is added in lowercase
+        products.Add(inputProduct.ToLower); //I am securing myself that the product is added in lowercase
+        Console.WriteLine($"{inputProduct} have been added. What is the price?:");
+        int inputPrice = Console.ReadLine();
+        while(!int.TryParse(inputPrice, out int result))
+        {
+            Console.WriteLine("Please, add a price with numbers!");
+        }
+        prices.Add(inputPrice);
     }
     else
     {
